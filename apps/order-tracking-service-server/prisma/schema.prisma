@@ -1,0 +1,27 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Order {
+  createdAt  DateTime @default(now())
+  id         String   @id @default(cuid())
+  status     String?
+  trackingId String?
+  updatedAt  DateTime @updatedAt
+}
+
+model DeliveryStatus {
+  createdAt  DateTime                      @default(now())
+  id         String                        @id @default(cuid())
+  statusName EnumDeliveryStatusStatusName?
+  updatedAt  DateTime                      @updatedAt
+}
+
+enum EnumDeliveryStatusStatusName {
+  Option1
+}
